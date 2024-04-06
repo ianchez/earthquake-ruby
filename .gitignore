@@ -2,10 +2,11 @@
 *.rbc
 *.env
 *.lock
-backend/bin/
+
 backend/.config
 backend/coverage/
 backend/InstalledFiles
+backend/log/*
 backend/pkg/
 backend/spec/reports/
 backend/spec/examples.txt
