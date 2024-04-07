@@ -5,9 +5,8 @@ class UsgsGeoJsonFeedService
     response = HTTParty.get(url)
     if response.success?
       data = JSON.parse(response.body)
-      data.each do |feature_data|
-        print(feature_data)
-        # Feature.create!(feature_data)
+      data['features'].each do |feature_data|
+        Feature.validate_and_create(feature_data)
       end
     else
       raise "Error fetching data from #{url}"
