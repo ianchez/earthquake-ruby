@@ -45,9 +45,9 @@ Bonus si utiliza alguno de estos framework: EmberJS, React, AngularJS o VueJS.
             "mag_type": String,
             "title": String,
             "coordinates": {
-            "longitude": Decimal,
-            "latitude": Decimal
-          }
+              "longitude": Decimal,
+              "latitude": Decimal
+            }
           },
             "links": {
               "external_url": String
