@@ -1,7 +1,11 @@
 module Api
   class FeaturesController < ApplicationController
     def index
-      formatted_features = Feature.all.map do |feature|
+      per_page = params[:per_page] || 10
+      page = params[:page] || 1
+      @features = Feature.page(page).per(per_page)
+
+      formatted_features = @features.map do |feature|
         {
           id: feature.id,
           type: "feature",
@@ -11,7 +15,7 @@ module Api
             place: feature.place,
             time: feature.time,
             # Converting tsunami to boolean: 0 is false, 1 is true
-            tsunami: feature.tsunami.to_i == 1,
+            tsunami: feature.tsunami == 1,
             mag_type: feature.mag_type,
             title: feature.title,
             coordinates: {
@@ -27,6 +31,11 @@ module Api
 
       render json: {
         data: formatted_features,
+        pagination: {
+          current_page: @features.current_page,
+          total: @features.total_pages,
+          per_page: @features.limit_value
+        }
       }
     end
   end

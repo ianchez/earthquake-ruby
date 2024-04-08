@@ -37,18 +37,18 @@ Bonus si utiliza alguno de estos framework: EmberJS, React, AngularJS o VueJS.
             "id": Integer,
             "type": "feature",
             "attributes": {
-            "external_id": String,
-            "magnitude": Decimal,
-            "place": String,
-            "time": String,
-            "tsunami": Boolean,
-            "mag_type": String,
-            "title": String,
-            "coordinates": {
-              "longitude": Decimal,
-              "latitude": Decimal
-            }
-          },
+              "external_id": String,
+              "magnitude": Decimal,
+              "place": String,
+              "time": String,
+              "tsunami": Boolean,
+              "mag_type": String,
+              "title": String,
+              "coordinates": {
+                "longitude": Decimal,
+                "latitude": Decimal
+              }
+            },
             "links": {
               "external_url": String
             }
