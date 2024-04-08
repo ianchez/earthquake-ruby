@@ -1,7 +1,7 @@
 module Api
   class FeaturesController < ApplicationController
     def index
-      per_page = params[:per_page] || 10
+      per_page = params[:per_page].to_i.clamp(1, 1000) || 10
       page = params[:page] || 1
       @features = Feature.page(page).per(per_page)
 
