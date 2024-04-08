@@ -1,7 +1,7 @@
 class Feature < ApplicationRecord
   # Validations
-  validates :id, :place, :url, :mag_type, :title, presence: true
-  validates :id, uniqueness: true
+  validates :external_id, :place, :url, :mag_type, :title, presence: true
+  validates :external_id, uniqueness: true
   validate :validate_coordinates
 
   # Validate magnitude
@@ -18,7 +18,7 @@ class Feature < ApplicationRecord
   end
 
   def self.validate_and_create(data)
-    feature = Feature.find_or_initialize_by(id: data["id"])
+    feature = Feature.find_or_initialize_by(external_id: data["id"])
 
     if feature.new_record?  
       # Convert timestamp to DateTime
@@ -30,7 +30,7 @@ class Feature < ApplicationRecord
       latitude = coordinates[1]
 
       attributes = {
-        id: data["id"],
+        external_id: data["id"],
         mag: data["properties"]["mag"],
         place: data["properties"]["place"],
         time: time_converted,
@@ -44,7 +44,7 @@ class Feature < ApplicationRecord
 
 
       feature.assign_attributes(attributes)
-      puts "Creating feature: #{feature.id}"
+      puts "Creating feature: #{feature.external_id}"
   
       if feature.new_record? && feature.valid?
         begin
@@ -53,10 +53,10 @@ class Feature < ApplicationRecord
           puts "Feature not saved: #{e.message}"
         end
       else
-        puts "Error - Feature not valid, id #{feature.id}: #{feature.errors.full_messages}"
+        puts "Error - Feature not valid, id #{feature.external_id}: #{feature.errors.full_messages}"
       end
     else
-      puts "Feature already exists: #{feature.id}"
+      puts "Feature already exists: #{feature.external_id}"
     end
   end
 end
