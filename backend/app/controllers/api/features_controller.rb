@@ -1,9 +1,28 @@
 module Api
   class FeaturesController < ApplicationController
+    DEFAULT_PER_PAGE = 10
+    DEFAULT_PAGE = 1
+    MAX_PER_PAGE = 1000
+
     def index
-      per_page = params[:per_page].to_i.clamp(1, 1000) || 10
-      page = params[:page] || 1
-      @features = Feature.page(page).per(per_page)
+      # Params
+      per_page = params[:per_page].to_i.clamp(1, MAX_PER_PAGE) || DEFAULT_PER_PAGE
+      page = params[:page] || DEFAULT_PAGE
+      mag_types = params[:mag_type]&.split(',')
+
+      if mag_types.present?
+        invalid_types = mag_types - Feature::VALID_MAG_TYPES
+        if invalid_types.empty?
+          @features = Feature.where(mag_type: mag_types)
+        else
+          return render json: { error: "Invalid mag_type values: #{invalid_types.join(', ')}" }, status: 400
+        end
+      else
+        @features = Feature.all
+      end
+
+      # Paginate the results
+      @features = @features.page(page).per(per_page)
 
       formatted_features = @features.map do |feature|
         {

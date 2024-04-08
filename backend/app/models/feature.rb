@@ -1,4 +1,6 @@
 class Feature < ApplicationRecord
+  VALID_MAG_TYPES = %w[md ml ms mw me mi mb mlg].freeze
+
   # Validations
   validates :external_id, :place, :url, :mag_type, :title, presence: true
   validates :external_id, uniqueness: true
