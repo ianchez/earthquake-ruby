@@ -22,7 +22,7 @@ class Feature < ApplicationRecord
   def self.validate_and_create(data)
     feature = Feature.find_or_initialize_by(external_id: data["id"])
 
-    if feature.new_record?  
+    if feature.new_record?
       # Convert timestamp to DateTime
       time_converted = Time.at(data["properties"]["time"] / 1000.0)
 
@@ -51,14 +51,19 @@ class Feature < ApplicationRecord
       if feature.new_record? && feature.valid?
         begin
           feature.save
+          { success: 'Feature created successfully', feature: feature }
         rescue ActiveRecord::RecordInvalid => e
           puts "Feature not saved: #{e.message}"
+          { error: feature.errors.full_messages }
         end
       else
         puts "Error - Feature not valid, id #{feature.external_id}: #{feature.errors.full_messages}"
+        { error: feature.errors.full_messages }
       end
     else
-      puts "Feature already exists: #{feature.external_id}"
+      error_message = "Feature already exists: #{feature.external_id}"
+      puts error_message
+      { error: error_message }
     end
   end
 end
