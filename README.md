@@ -1,5 +1,70 @@
 # earthquake-ruby
-Earthquake data persistence from USGS using Ruby on Rails
+Earthquake data persistence from USGS using Ruby on Rails and React.js
+A simple application to get and persist earthquake data from USGS and expose it through an API.
+Allows you to create comments related to each earthquake event.
+
+## Installation
+
+##### Server
+1. Install postgresql
+    Check the official documentation for the installation of postgresql in your operating system.
+    [Postgresql Official Website](https://www.postgresql.org/download/)
+2. Install RVM (Ruby Version Manager)
+    Check the official documentation for the installation of RVM in your operating system.
+    [RVM Official Website](https://rvm.io/rvm/install)
+3. Clone this repo, and navigate to the project folder
+4. Go to the **./backend** folder and install the ruby version specified in the .ruby-version file
+    ```bash
+    rvm install $(cat .ruby-version)
+    ```
+5. Install the bundler gem
+    ```bash
+    gem install bundler
+    ```
+6. Install the project dependencies
+    ```bash
+    bundle install
+    ```
+7. Create the database
+    ```bash
+    rails db:create
+    ```
+8. Run the migrations
+    ```bash
+    rails db:migrate
+    ```
+9. Run the server on port 5000
+    ```bash
+    rails s -p 5000
+    ```
+
+##### Client
+10. Go to the **./client** folder
+
+    Make sure you have node installed in your system
+    ```bash
+    node -v
+    ```
+
+    If not, use NVM (Node Version Manager) to install the node version specified in the .nvmrc file [NVM Github Repository](https://github.com/nvm-sh/nvm)
+
+    Install the node version specified in the .nvmrc file
+    ```bash
+    nvm install $(cat .nvmrc)
+    ```
+
+11. Install the project dependencies
+    ```bash
+    npm install
+    ```
+12. Run the client server
+    ```bash
+    npm start
+    ```
+13. Open your browser and go to the url http://localhost:3000
+
+14. You can also use the API endpoints pointing the url http://localhost:5000/api/features
+
 
 ## Description (objective)
 Desarrollar un aplicación en Ruby o framework basado en Ruby que contemple una Task para obtener y persistir datos y una API que exponga dos endpoints que serán consultados desde un cliente externo.
