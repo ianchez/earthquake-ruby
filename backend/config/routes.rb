@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   namespace :api do
-    resources :features, only: [:index]
+    resources :features, only: [:index] do
+      resources :comments, only: [:create]
+    end
   end
 end
