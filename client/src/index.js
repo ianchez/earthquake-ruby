@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 // screens
 import HomeScreen from './HomeScreen';
 import EarthquakesScreen from './EarthquakesScreen';
+import EarthquakesDetailsScreen from './EarthquakesDetailsScreen';
 
 import {
   createBrowserRouter,
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
   {
     path: "/earthquakes",
     element: <EarthquakesScreen />,
+  },
+  {
+    path: "/earthquakes/:id",
+    element: <EarthquakesDetailsScreen />,
+  },
+  {
+    path: "*",
+    element: <div>Not Found</div>,
   },
 ]);
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Select from 'react-select';
 import useEarthquakes, { DEFAULT_VALUES as QUAKE_DEFAULTS } from "./hooks/useEarthquakes";
 
@@ -9,6 +9,8 @@ const selectorOptions = [
 ];
 
 const EarthquakesScreen = () => {
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(QUAKE_DEFAULTS.page);
   const [perPage, setPerPage] = useState(QUAKE_DEFAULTS.perPage);
   const [magTypeSelectOptions, setMagTypeSelectOptions] = useState([selectorOptions[0]]);
@@ -53,14 +55,21 @@ const EarthquakesScreen = () => {
     setAllSelected(false);
   };
 
+  const handleItemPress = (id) => {
+    navigate(`/earthquakes/${id}`);
+  }
+
   return (
-    <div>
+    <div className="screen">
       <Link to="/">Go back to Home</Link><br />
+
+      <h1>Earthquakes</h1>
 
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
+          width: "100%",
         }}
       >
         <label>
@@ -76,7 +85,7 @@ const EarthquakesScreen = () => {
 
       </div>
       
-      <label>
+      <label className="w100">
         Magnitude Type:
         <Select
           isMulti
@@ -87,14 +96,13 @@ const EarthquakesScreen = () => {
         />
       </label>
 
-      <h1>Earthquakes</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
           <ul>
             {earthquakes.map((earthquake) => (
-              <li key={earthquake.id}>
+              <li className="pressable" key={earthquake.id} onClick={() => handleItemPress(earthquake.id)}>
                 {earthquake.attributes.title}
               </li>
             ))}
