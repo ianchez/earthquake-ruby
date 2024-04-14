@@ -57,5 +57,35 @@ module Api
         }
       }
     end
+
+    def show
+      feature = Feature.find_by(id: params[:id])
+
+      if feature
+        render json: {
+          id: feature.id,
+          type: "feature",
+          attributes: {
+            external_id: feature.external_id,
+            magnitude: feature.mag,
+            place: feature.place,
+            time: feature.time,
+            # Converting tsunami to boolean: 0 is false, 1 is true
+            tsunami: feature.tsunami == 1,
+            mag_type: feature.mag_type,
+            title: feature.title,
+            coordinates: {
+              longitude: feature.longitude,
+              latitude: feature.latitude
+            }
+          },
+          links: {
+            external_url: feature.url
+          }
+        }
+      else
+        render json: { error: "Feature not found" }, status: 404
+      end
+    end
   end
 end
