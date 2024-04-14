@@ -1,24 +1,7 @@
-import { useEffect, useState } from 'react';
+import useEarthquakes from "./hooks/useEarthquakes";
 
 const EarthquakesScreen = () => {
-  const [earthquakes, setEarthquakes] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchEarthquakes = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch('http://localhost:3000/api/features');
-      const { data } = await response.json();
-      setEarthquakes(data);
-    } catch (error) {
-      console.error(error);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchEarthquakes();
-  }, []);
+  const { earthquakes, loading } = useEarthquakes();
 
 
   return (
