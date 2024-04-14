@@ -6,6 +6,9 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Require the CorsMiddleware class
+require_relative '../app/middleware/cors_middleware'
+
 module Backend
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -23,5 +26,8 @@ module Backend
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Enable CORS for all origins
+    config.middleware.insert_before 0, CorsMiddleware
   end
 end
