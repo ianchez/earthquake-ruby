@@ -19,7 +19,9 @@ const HomeScreen = () => {
         </a> every day, so expect 1 day delay between the feed and this app data
       </p>
 
-      <Link to="/earthquakes">View Earthquakes</Link>
+      <h3>
+        <Link to="/earthquakes">View Earthquakes</Link>
+      </h3>
     </div>
   );
 }
