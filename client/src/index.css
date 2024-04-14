@@ -48,8 +48,12 @@ label {
   color: rgb(230, 227, 227);
 }
 
-li {
+ul {
+  width: 100%;
   list-style-type: square;
+}
+
+li {
   margin: 10px 0px
 }
 
@@ -63,8 +67,7 @@ p {
 
 textarea {
   height: 60px;
-  margin: 0px auto;
-  width: 100%;
+  width: 99%;
 }
 
 .App {
@@ -75,6 +78,29 @@ textarea {
   font-size: calc(8px + 2vmin);
   min-height: 100vh;
   color: white;
+}
+
+.comments-list {
+  background-color: rgba(176, 157, 132, 0.427);
+  font-size: calc(2px + 1.2vmin);
+  list-style-type: none;
+  text-align: left;
+  margin: 0;
+  padding: 2px 20px;
+  width: 95%;
+}
+
+.comment {
+  background-color: rgba(176, 157, 132, 0.427);
+  border: 1px solid #61dafb;
+  border-radius: 2px;
+  margin: 10px 0px;
+  padding: 10px;
+}
+
+.comment-date {
+  color: #61dafb;
+  font-size: calc(2px + 1vmin);
 }
 
 .screen {
