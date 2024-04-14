@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     resources :features, only: [:index, :show] do
       resources :comments, only: [:create]
     end
+
+    get 'features/:feature_id/comments', to: 'comments#index_by_feature'
   end
 end

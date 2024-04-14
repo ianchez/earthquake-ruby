@@ -13,6 +13,17 @@ module Api
       render json: comments
     end
 
+    def index_by_feature
+      comments = Comment.where(feature_id: params[:feature_id])
+
+      if comments.empty?
+        render json: { error: "No comments found for feature #{params[:feature_id]}" }, status: :not_found
+        return
+      end
+
+      render json: comments
+    end
+
     def create
       feature = Feature.find_by(id: params[:feature_id])
       unless feature
