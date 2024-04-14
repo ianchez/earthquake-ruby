@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api/features';
+// TODO: Move to a .env file
+const API_URL = 'http://localhost:5000/api/features';
 class ApiService {
   static async fetchEarthquakes(mag_type, page, per_page) {
     try {
