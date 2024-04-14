@@ -1,8 +1,7 @@
 import useEarthquakes from "./hooks/useEarthquakes";
 
 const EarthquakesScreen = () => {
-  const { earthquakes, loading } = useEarthquakes();
-
+  const { earthquakes, loading } = useEarthquakes({page: 1, perPage: 10});
 
   return (
     <div>
