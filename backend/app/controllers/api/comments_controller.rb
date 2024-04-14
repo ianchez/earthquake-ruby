@@ -30,8 +30,8 @@ module Api
         render json: { error: 'Feature not found' }, status: :not_found
         return
       end
-    
-      result = Comment.validate_and_create({ body: comment_params[:body], feature_id: feature.id })
+
+      result = Comment.validate_and_create({ body: comment_params, feature_id: feature.id })
       if result[:error]
         render json: { error: result[:error] }, status: :unprocessable_entity
       else

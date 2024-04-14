@@ -44,6 +44,9 @@ gem "bootsnap", require: false
 # Do HTTP requests
 gem 'httparty'
 
+# Allow CORS
+gem 'rack-cors'
+
 # Schedule tasks
 gem 'rufus-scheduler'
 
