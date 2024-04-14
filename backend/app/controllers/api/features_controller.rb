@@ -6,7 +6,7 @@ module Api
 
     def index
       # Params
-      per_page = (params[:per_page] || DEFAULT_PER_PAGE).clamp(1, MAX_PER_PAGE)
+      per_page = (params[:per_page] || DEFAULT_PER_PAGE).to_i.clamp(1, MAX_PER_PAGE)
       page = params[:page] || DEFAULT_PAGE
       mag_types = params[:mag_type]&.split(',')
 
