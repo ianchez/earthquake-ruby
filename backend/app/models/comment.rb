@@ -4,10 +4,7 @@ class Comment < ApplicationRecord
   validates :body, presence: true
 
   def self.validate_and_create(data)
-    feature = Feature.find_by(id: data[:feature_id])
-    return { error: 'Feature not found' } unless feature
-
-    comment = self.new(body: data[:body], feature: feature)
+    comment = self.new(body: data[:body], feature_id: data[:feature_id])
     if comment.valid?
       comment.save
       { success: 'Comment created successfully', comment: comment }
