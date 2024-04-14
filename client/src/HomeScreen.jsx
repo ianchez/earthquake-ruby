@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const HomeScreen = () => {
   return (
     <div className="screen">
@@ -16,6 +18,8 @@ const HomeScreen = () => {
           USGS Latest 30 days Feed
         </a> every day, so expect 1 day delay between the feed and this app data
       </p>
+
+      <Link to="/earthquakes">View Earthquakes</Link>
     </div>
   );
 }

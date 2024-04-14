@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.css';
-import HomeScreen from './HomeScreen';
 import reportWebVitals from './reportWebVitals';
+
+// screens
+import HomeScreen from './HomeScreen';
+import EarthquakesScreen from './EarthquakesScreen';
 
 import {
   createBrowserRouter,
@@ -13,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeScreen />,
+  },
+  {
+    path: "/earthquakes",
+    element: <EarthquakesScreen />,
   },
 ]);
 
