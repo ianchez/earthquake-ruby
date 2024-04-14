@@ -1,5 +1,12 @@
 module Api
   class CommentsController < ApplicationController
+    # Disable CSRF protection
+    skip_before_action :verify_authenticity_token
+
+    # Handle missing parameters
+    rescue_from ActionController::ParameterMissing do |exception|
+      render json: { error: exception.message }, status: :bad_request
+    end
 
     def index
       comments = Comment.all
@@ -13,12 +20,18 @@ module Api
         return
       end
     
-      result = Comment.validate_and_create(comment_params)
+      result = Comment.validate_and_create({ body: comment_params[:body], feature_id: feature.id })
       if result[:error]
         render json: { error: result[:error] }, status: :unprocessable_entity
       else
         render json: result[:comment], status: :created
       end
+    end
+
+    private
+
+    def comment_params
+      params.require(:body)
     end
   end
 end
