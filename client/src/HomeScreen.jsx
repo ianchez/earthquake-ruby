@@ -1,6 +1,6 @@
-function App() {
+const HomeScreen = () => {
   return (
-    <div className="App">
+    <div className="screen">
       <h1> Latest Earthquakes </h1>
 
       <p>
@@ -20,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomeScreen;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import HomeScreen from './HomeScreen';
 import reportWebVitals from './reportWebVitals';
 
 import {
@@ -12,7 +12,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <HomeScreen />,
   },
 ]);
 
