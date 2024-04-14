@@ -14,19 +14,26 @@ const useEarthquakes = ({
 }) => {
   const [earthquakes, setEarthquakes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(0);
+  const [fetchTrigger, setFetchTrigger] = useState(0);
 
   const fetchEarthquakes = async (magType, page, perPage) => {
     setLoading(true);
-    const data = await ApiService.fetchEarthquakes(magType, page, perPage);
-    setEarthquakes(data);
+    const { data, pagination } = await ApiService.fetchEarthquakes(magType, page, perPage);
+    console.log({ data, pagination })
+    setEarthquakes(data || []);
+    setTotalPages(pagination.total || 0);
     setLoading(false);
   };
 
   useEffect(() => {
     fetchEarthquakes(magType, page, perPage);
-  }, [magType, page, perPage]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [magType, page, perPage, fetchTrigger]);
 
-  return { earthquakes, loading };
+  const refetch = () => setFetchTrigger(prev => prev + 1); // Function to trigger a refetch
+
+  return { earthquakes, totalPages, loading, refetch };
 }
 
 export default useEarthquakes;
